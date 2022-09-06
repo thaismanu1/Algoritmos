@@ -1,0 +1,33 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int vet[30]; //elementos do vetor
+	int mais=0; //mais de 10M de views
+	int menos=0; //menos de 10M de views
+	int n; //tamanho do vetor
+	
+	cin >> n;
+	
+	for(int i=0; i<n; i++)
+	{
+		cin >> vet[i];
+		
+		if(vet[i]>10000000)
+		{
+			mais++;
+		}
+		if(vet[i]<10000000)
+		{
+			menos++;
+		}
+	}
+	
+	//saida de dados
+	cout << mais << "video(s) com mais de 10M views" << endl;
+	cout << menos << "video(s) com menos de 10M views" << endl;
+		
+	return 0;
+}
