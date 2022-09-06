@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+struct info
+{
+	char nome[50], raca[30];
+	int id;
+};
+
+int main()
+{	//estrutura 
+	struct info animais[100];
+	int n, i;
+
+	cout << "Digite o numero de animais que deseja cadastrar (1 - 100): ";
+	cin >> n;
+
+	//comando for e entrada de dados
+	for(i = 0; i < n; i++)
+	{
+		cout << "Nome: ";
+		cin.ignore();
+		cin.getline(animais[i].nome, 50);
+		cout << "Raca: ";
+		cin.getline(animais[i].raca, 30);
+		cout << "Idade: ";
+		cin >> animais[i].id;
+	}
+
+	//saída de dados
+	cout << "Animais cadastrados: " << endl;
+
+	for(i = 0; i < n; i++)
+		cout << animais[i].nome << " " << animais[i].raca << " " << animais[i].id << endl;
+	
+	return 0;
+}
