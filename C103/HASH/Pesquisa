@@ -1,0 +1,114 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+
+using namespace std;
+
+struct dado{
+	int status;
+	int k;
+};
+
+//hash aux
+int hash_aux(int k, int m)
+{
+	int res;
+	
+	res = k%m; //k mod m
+	if(res < 0)
+		res += m;
+	
+	return res;
+	
+}
+
+//sondagem linear
+int h(int k, int i, int m)
+{
+	int res1;
+	
+	res1 = (hash_aux(k, m)+i)%m;
+	
+	return res1;
+}
+
+//insere elementos na tabela
+int hash_insert(dado t[], int m, int k)
+{
+	int i=0;
+	int j=0;
+	
+	do{
+		j = h(k, i, m);
+		if(t[j].status != 1){
+			t[j].k = k;
+			t[j].status = 1;
+			
+			return j;
+		}else
+		{
+			i= 1+i;
+		}
+	}while(i != m);
+	
+	return -1;
+}
+
+int hash_search(dado t[], int m, int k)
+{
+	int i;
+	int j;
+	
+	i=0;
+
+    do{
+    	j = h(k,i,m);
+        if (t[j].k == k)
+            return j;
+        else
+        i = i+1;
+	}
+    while (t[j].status != 0 && i < m);
+    
+    return -1;
+}
+
+int main()
+{
+	int m; //tamanho
+	int k; //chave
+	int res; //retorno
+	int num; //elemento a ser procurado
+	
+	dado t[30];
+	
+	cin >> m;
+	
+	//iguala os elementos a -1
+	for(int i=0; i < m; i++)
+	{
+		t[i].k = -1;
+		t[i].status = 0;
+	}
+	
+	cin >> k;
+	while(k != 0){
+	   res = hash_insert(t,m,k);
+	   cin >> k;	
+	}
+	
+	//entra com o elemento que deseja buscar
+	cin >> num;
+	
+	res = hash_search(t,m,num);
+	
+	if (res == -1){
+		cout << "Chave " << num << " nao encontrado" << endl;
+	}
+	else{
+		cout << "Chave " << num << " encontrada na posicao " << res << endl;
+	}
+	
+	return 0;
+}
