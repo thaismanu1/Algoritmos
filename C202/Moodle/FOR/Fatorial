@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int n; 
+	int fat; //fatorial
+	
+	cin >> n;
+	
+	fat = 1; //iguala fatorial a 1
+	
+	//estrutura de repetcao
+	for(int i=1; i<=n;i++)
+	{
+		fat = fat * i; //fat multiplica i até N
+	
+	}
+	
+	//saída de dados
+	cout << fat;
+	
+	return 0;
+}
