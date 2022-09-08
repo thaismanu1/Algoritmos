@@ -1,0 +1,39 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int n; //tamanho do vetor
+	int x[30]; //elementos do vetor
+	int maior=0; //variavel para guardar o maior numero
+	int menor=2000; //variavel para guardar o menor numero
+	
+	//entrada de dados
+	cin>> n;
+	
+	
+	//estrutura de repetcao
+	for(int i=0; i<n; i++)
+	{
+		cin >> x[i];
+		
+		//quando x for maior que 0; x passa a ser o maior numero
+		if(x[i]>maior)
+		{
+			maior = x[i];
+		}
+		
+		//quando x for menor que 2000; x passa a ser o menor numero
+		if(x[i]<menor)
+		{
+			menor = x[i];
+		}
+	}
+	
+	//saída de dados
+	cout << "Maior: " << maior << endl;
+	cout << "Menor: " << menor << endl;
+  
+  return 0;
+}
