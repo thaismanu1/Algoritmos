@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int n; //numero de participantes
+	int Ni[30]; //tempo de corrida
+	int menor = 2000; 
+	
+	cin >> n;
+	
+	for(int i=1; i<n; i++)
+	{
+		cin >> Ni[i]; //entra com o tempo de cada um
+		
+    //encontrando o ganhador e seu indice
+		if(Ni[i] < menor)
+		{
+			menor = i;
+		}
+	}
+	
+  //saída de dados
+	cout << menor << endl;
+	
+	return 0;
+}
