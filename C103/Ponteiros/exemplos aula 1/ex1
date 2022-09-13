@@ -1,0 +1,22 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int a; //variavel int
+	int *b = NULL; //ponteiro para int
+	
+	a = 2;
+	b = &a; //&: operador de referencia, terona o endereço de a
+	
+	cout << "a= " << a << endl;
+	cout << "b= " << b << endl;
+	
+	*b= 3; //operador de referencia
+	
+	cout << "a= " << a << endl;
+	cout << "b= " << b << endl;
+	
+	return 0;
+}
