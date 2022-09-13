@@ -1,0 +1,23 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int x, y;
+	int *p, *q;
+	int *soma, res;
+	
+	x = 2;
+	y = 3;
+	
+	p = &x;
+	q = &y;
+	
+	res = *p + *q;
+	soma = &res;
+	
+	cout << "soma = " << *soma << endl;
+	
+	return 0;
+}
