@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	int x, y;
+	int *p, *res;
+	int soma;
+	
+	x = 2;
+	y = 3;
+	
+	p = &x;
+	res = &soma;
+	
+	
+	*res = 0; // soma = 0
+	*res = *res + *p;
+	p = &y;
+	*res = *res + *p;
+	
+	cout << "soma = " << soma << endl;
+	
+	return 0;
+}
