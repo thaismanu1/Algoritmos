@@ -1,0 +1,42 @@
+#include <iostream>
+
+using namespace std;
+
+int menor(int *vetor, int N) 
+{
+	int menor = 2000;
+	
+	for (int i=0; i<N; i++)
+	{
+		if(vetor[i] < menor)
+			menor = vetor[i];
+	}
+	
+	return menor;
+}
+
+int main()
+{
+	int *x; //elementos do vetor
+	int n; //tamanho
+	int i;
+	int m; //menor numero do vetor
+	
+	//entrando com o tamanho
+	cin >> n;
+	
+	x = new int [n];
+	
+	//entrando com os elementos
+	for(i = 0; i<n; i++)
+		cin >> x[i];
+	
+	//chamando a funcao
+	m = menor(x,n);
+	
+	cout << m << endl;
+	
+	delete x;
+	
+	return 0;
+}
