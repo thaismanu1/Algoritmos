@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+//funcao recursiva
+int rec (int n)
+{
+     
+    if(n == 0)
+    return 0;
+    
+    else
+    return n + rec(n-1);
+}
+
+//funcao principal
+int main()
+{
+    int n, soma = 0;
+    
+    cin >> n;
+    
+    soma = rec(n); //chama a funcao recursiva
+    
+    //saída de dados
+    cout << "Soma = " << soma << endl;
+    
+    
+    return 0;
+}
