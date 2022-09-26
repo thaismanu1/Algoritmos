@@ -1,0 +1,30 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <fstream>
+using namespace std;
+
+//calcular a^n
+int recursiva(int a, int n){
+
+if(n == 0)
+return 1;
+else
+return a*recursiva(a, n-1);
+
+}
+
+
+int main(){
+int a, n, res;
+//leitura de a e n
+cin >> a >> n;
+//calcular a^n
+res = recursiva(a, n);
+//mostrar a^n
+cout << res << endl;
+
+
+return 0;
+
+}
