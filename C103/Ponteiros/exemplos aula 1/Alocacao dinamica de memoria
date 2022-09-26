@@ -1,0 +1,40 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+struct dado
+{
+	float n1, n2, n3, n4;
+	float media;
+};
+
+int main()
+{
+	
+	dado *aluno = NULL;
+	double m = 0;
+	
+	aluno = new dado[1];
+	
+	for(int i=0; i<1; i++)
+	{
+	cin >> aluno[i].n1;
+	cin >> aluno[i].n2;
+	cin >> aluno[i].n3;
+	cin >> aluno[i].n4;
+	}
+	
+	for(int i=0; i<1; i++)
+	{
+		m+= aluno[i].n1 + aluno[i].n2 + aluno[i].n3 + aluno[i].n4;
+	}
+	
+	m=m/4;
+	cout << setprecision(2) << fixed; //precisao de 2 casas decimais
+	cout << m;
+	
+	delete aluno;
+
+	return 0;
+}
