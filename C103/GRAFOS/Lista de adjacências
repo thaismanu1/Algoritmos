@@ -1,0 +1,59 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+struct no
+{
+	int v; //destino
+	int p; //peso
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+	no aux;
+	aux.v = v;
+	aux.p = p;
+	int i;
+	
+	adj[u].push_back(aux);
+	
+	if(orientado == 0)
+	{
+		aux.v = u;
+		adj[v].push_back(aux);
+	}
+
+}
+
+int main()
+{
+	list<no> adj[10]; //lista adjacencias
+	
+	int u, v; //origem e destino
+	int p; //peso da aresta
+	list<no>::iterator q;
+	
+	int i; //contador
+	int nVertices; // # vertices do grafo
+	int orientado; // 1 = orientado, 0 = nao orientado
+	
+	
+	
+	cin >> nVertices; //entra com o numero de vertices
+	cin >> orientado >> u >> v >> p;
+	
+	while(u != -1 && v != -1 && p != -1)
+	{
+		cria_aresta(adj,u,v,p,orientado);
+		cin >> u >> v >> p; //entra com origem, destino e peso da aresta
+	
+	}
+	
+	//mostrando a lista de adjacecias
+	for(i=0; i< nVertices; i++)
+		for(q= adj[i].begin(); q != adj[i].end(); q++)
+			cout << i << ' ' << q->v << ' ' << q->p << endl;
+	
+	return 9;
+}
