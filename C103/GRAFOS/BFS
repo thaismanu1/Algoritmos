@@ -1,0 +1,88 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+struct no
+{
+    int v; //vertice
+    int peso; //tamanho da aresta
+};
+
+void bfs(list<no> adj[], int nVertices, int s)
+{
+    int state[30]; //estado de cada grafo
+    int p[30]; //pais
+    int i = 0; //contador
+    int u = 0;
+    int v = 0;
+    
+    list<no>::iterator it; //iterador p varrer lista
+    list<int> q;
+
+    for(u = 0; u < nVertices; u++)
+    {
+        if(u!=s)
+        {
+            state[u] = -1; //undiscovered
+            p[u] = -1;
+        }
+    }
+
+        state[s] = 0; //discovered
+        p[s] = -1;
+        q.push_back(s); //coloca s no final da fila
+
+        while(!q.empty())
+        {
+            u = q.front();
+            q.pop_front();
+            cout << u << endl;
+            for(it = adj[u].begin(); it!= adj[u].end(); it++)
+            {
+                v = it->v;
+                cout << u << ' ' << v << endl;
+                if(state[v] == -1)
+                {
+                    state[v] = 0;
+                    p[v] = u;
+                    q.push_back(v);
+                }
+            }
+            state[u] = 1; // processed
+      }
+}
+
+int main()
+{
+    int nVertices; //numero de vertices
+    int s; //vertice inicial
+    int u;
+    int v;
+    int peso;
+    no aux; //no auxiliar
+    list<no> adj[30]; //lista de adjacencias
+    list<no>::iterator q;
+    int i = 0; //contador
+
+    cin >> nVertices;
+    cin >> s;
+
+    cin >> u >> v >> peso;
+    
+    while(u != -1 && v!= -1 && peso != -1)
+    {
+        aux.v = v;
+        aux.peso = peso;
+        adj[u].push_back(aux);
+        aux.v = u;
+        adj[v].push_back(aux);
+        
+        cin >> u >> v >> peso;
+    }
+    
+    bfs(adj, nVertices, s); //chamando a funcao
+    
+    return 0;
+
+}
