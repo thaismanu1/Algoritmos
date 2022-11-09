@@ -1,0 +1,101 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+struct no
+{
+	int v;//destino
+	int p;//peso
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+	no aux;
+	aux.v = v;
+	aux.p = p;
+	adj[u].push_back(aux);
+
+	if(orientado == 0)
+	{
+		aux.v = u;
+		adj[v].push_back(aux);
+	}
+}
+
+void bfs(list<no>adj[], int nVertices, int s)
+{
+	int state[nVertices];
+	int p[nVertices];
+
+	int u;
+	int i; 
+	int v;
+	int cont = 0;
+	int tp = 0;
+	
+	list<no>::iterator q;
+	list<int> Q;
+
+	for(i = 0; i < nVertices; i++)
+	{
+		state[i] = 0; //0 nao descoberto
+		p[i] = -1;
+	}
+
+	state[s] = 1; //1 descoberto
+	Q.push_back(s);
+
+	while (!Q.empty())
+	{
+		u = *Q.begin();
+		Q.pop_front();
+
+		for (q = adj[u].begin(); q != adj[u].end(); q++)
+		{
+			v = q -> v;
+
+			if (state[v] == 0)
+			{
+				state[v] = 1;
+				p[v] = u;
+				Q.push_back(v);
+			}
+		}
+		
+		state[u] = 2;
+
+		if(state[u] == 'u')
+			tp;
+		else
+			cont++;
+	}
+
+	if(cont == nVertices)
+		cout << "conexo" << endl;
+	else
+		cout << "nao conexo" << endl;
+}
+int main()
+{
+	list<no> adj[1000]; // lista de adjacencias
+	int i; //contador
+	int s; //vertice inicial
+	int x; //tamanho do vertice do grafo
+	int u, v, p = 1;
+
+	cin >> x >> s >> u >> v;
+
+	while(u != -1 && v != -1 && p != -1)
+	{
+		cria_aresta(adj, u, v, p, 0);
+		cin >> u;
+		cin >> v;
+	}
+
+	bfs(adj, x, s); //chama a função bfs
+
+	for(i = 0; i < x; i++) //desalocando a memoria da lista
+		adj[i].pop_front();
+	return 0;
+}
