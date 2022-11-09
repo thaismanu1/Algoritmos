@@ -1,0 +1,47 @@
+#include <iostream>
+#include <iomanip>
+#include <list>
+using namespace std;
+
+bool encontrar(list<int> lista, int x)
+{
+	 
+	 while(!lista.empty())
+	 {
+	 	if(*lista.begin() == 0)
+		 {
+		 	lista.pop_front();
+		 	return 1;
+		 }
+		 else lista.pop_front();
+	 }
+		 return 0;
+	 }
+	 
+int main()
+{
+ list<int> fila; //ponteiro para a fila
+ list<int>::iterator p;
+ 
+ int x; //var aux
+ int n; //elemento a ser procurado
+
+ //lendo elementos e inserindo-os na fila
+ cin >> x;
+ 
+ while(x != 0)
+ {
+  cin >> x;
+  fila.push_front(x);
+ }
+ 
+ //numero a ser pesquisado 
+ cin >> n;
+ 
+ if(encontrar(fila,n) == 1){
+ cout << "Encontrado" << endl;
+ }
+	else cout <<"Nao encontrado" << endl;
+ 
+ return 0;
+}
