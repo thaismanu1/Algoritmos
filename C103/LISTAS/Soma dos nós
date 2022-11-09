@@ -1,0 +1,41 @@
+#include <iostream>
+#include <iomanip>
+#include <list>
+using namespace std;
+
+int soma(list<int> lista)
+{
+	 int soma = 0;
+	 list<int>::iterator p;
+	 
+	 for(p=lista.begin(); p! = lista.end(); p++)
+	 {
+	 	soma += *p;
+	 }
+	 
+		 return soma;
+	 }
+	 
+int main()
+{
+ list<int> fila; //ponteiro para a fila
+ list<int>::iterator p;
+ 
+ int x; //var aux
+ 
+ cin >> x;
+
+ while(x != 0)
+ {
+  fila.push_front(x);
+  cin >> x;
+ }
+ 
+ cout << soma(fila) << endl;
+ 
+ while(!fila.empty())
+  fila.pop_front();
+ 
+ 
+ return 0;
+}
