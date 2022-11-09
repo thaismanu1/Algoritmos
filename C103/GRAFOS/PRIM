@@ -1,0 +1,118 @@
+#include <iostream>
+#include <list>
+#include <climits>
+
+using namespace std;
+
+struct no
+{
+    int v; //vertice
+    int peso; //tamanho da aresta
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+	no aux;
+	aux.v = v;
+	aux.peso = p;
+	
+	adj[u].push_back(aux);
+	
+	if(orientado == 0)
+	{
+		aux.v = u;
+		adj[v].push_back(aux);
+	}
+
+}
+
+void prim(list<no>adj[], int nVertices, int start)
+{
+	int u; //vertice inicial
+	int v; //vertice de destino
+	int weight = 0; //peso
+	int intree[30]; // f = napo está na arvore, t = está na arvore
+	int distance[30];
+	int parent[30]; //pais
+	int destino;
+	int dist;
+	int i; //contador
+	int soma = 0; //custo
+	list<no>::iterator it; //varre list<no> adj[]
+	
+	for(u = 0; u < nVertices; u++) //para cada u em V[g]
+	{
+		intree[u] = false;
+		distance[u] = INT_MAX;
+		parent[u] = -1;
+	}
+	
+	distance[start] = 0;
+	v = start;
+	
+
+	
+	while(intree[v] == false)
+	{
+		intree[v] = true;
+		for(it = adj[v].begin(); it!= adj[v].end(); it++) //para cada p em adj[v]
+		{
+			destino = it->v;
+			weight = it->peso;
+			if(distance[destino] > weight && intree[destino]==false)
+			{
+				distance[destino] = weight;
+                parent[destino] = v;
+			}
+		}
+        
+        v = 0;
+        dist = INT_MAX;
+        for(u = 0; u < nVertices; u++)
+		{
+			if(intree[u]==false && dist>distance[u])
+			{
+				dist = distance[u];
+                v = u;
+			}
+		}
+	}
+		for(i=1; i < nVertices; i++)
+		{
+			cout << parent[i] << ' ' << i << endl;
+			soma += distance[i];
+		}
+		
+		cout << "Custo: "  << soma << endl;
+}
+
+int main()
+{
+	int nVertices;
+	int start; //vertice inial do grafo
+	int orientado; // 0 nao orientado, 1 orientado
+	int u; //vertice de origem
+	int v; //vertice de destino
+	int p; //peso
+	int i = 0; // contador
+	
+	list<no> adj[30];
+	list<no>::iterator q;
+	
+	cin >> nVertices >> orientado >> start;
+	cin >> u >> v >> p;
+	while(u != -1 && v!= -1 && p != -1)
+	{
+		cria_aresta(adj, u, v , p, orientado);
+		cin >> u >> v >> p;
+	}
+	
+	cout << "Arvore Geradora Minima: " << endl;
+	prim(adj, nVertices, start);
+	
+		
+	return 0;	
+}
+		
+		
+		
