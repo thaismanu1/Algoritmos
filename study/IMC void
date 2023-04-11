@@ -1,0 +1,68 @@
+#include <iostream>
+#include <stdio.h>>
+
+//funcao para calculo IMC
+void IMC(double peso, double altura, double sexo)
+{
+  double imc;
+  
+  //calculo
+  imc = peso/(altura*altura);
+
+  //se sexo == 1, mostra classificação de peso para mulheres
+  if(sexo==1)
+  {
+    if(imc <= 19.1)
+    std::cout << "Peso baixo" << std::endl;
+    
+    if(imc > 19.1 && imc <= 25.8)
+    std::cout << "Peso ideal" << std::endl;
+    
+    if(imc > 25.8 && imc <= 27.3)
+    std::cout << "acima do peso ideal" << std::endl;
+    
+    if(imc > 27.3 && imc <= 32.3)
+    std::cout << "Obesidade" << std::endl;
+    
+    if(imc > 32.3)
+    std::cout << "Obesidade morbida" << std::endl;
+  }
+
+  // se sexo == 0, mostra classificação de peso para homens
+  if(sexo==0)
+  {
+    if(imc <= 20.7)
+    std::cout << "Peso baixo" << std::endl;
+    
+    if(imc > 20.7 && imc <= 26.4)
+    std::cout << "Peso ideal" << std::endl;
+    
+    if(imc > 26.4 && imc <= 27.8)
+    std::cout << "acima do peso ideal" << std::endl;
+    
+    if(imc > 27.8 && imc <= 31.1)
+    std::cout << "Obesidade" << std::endl;
+    
+    if(imc > 32.3)
+    std::cout << "Obesidade morbida" << std::endl;
+  }
+  
+  return;
+}
+
+int main() {
+
+  double p; // peso
+  double h; // altura
+  int s; //sexo
+
+  std::cout << "Digite seu peso e altura, respectivamente" << std::endl;
+  std::cin >> p >> h;
+  std::cout << "Digite 0 para homem, 1 para mulher" << std::endl;
+    std::cin >> s;
+
+  //chamando a funcao void
+  IMC(p,h,s);
+  
+    return 0;
+}
