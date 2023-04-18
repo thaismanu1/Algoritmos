@@ -1,0 +1,95 @@
+#include <iostream>
+
+using namespace std;
+
+
+struct dado
+{
+	int status;         // status da chave
+	int k;          // chave
+};
+
+int hash_aux(int k, int m)
+{
+	int h;
+
+	//k mod m
+	h = k % m;
+
+	if (h < 0)
+	{
+		h = k + m;
+	}
+
+	return h;
+}
+
+// calcula a posição inicial utilizando a função hash_aux e adiciona o valor de i
+int hash1(int k, int i, int m)
+{
+	// h(k,i,m)=(h'(k,m)+i)modm
+
+	int H;
+
+	//sondagem linear
+	H = (hash_aux(k, m) + i) % m;
+
+	return H;
+}
+
+// insere uma chave na tabela hash
+int hash_insert(dado t[], int m, int k)
+{
+	int i = 0;
+	int j;
+
+	do
+	{
+  // utilizando a função hash1 para encontrar a posição em que a chave deve ser inserida e verificando se essa posição está vazia (status = 0)
+		j = hash1(k, i, m); 
+		if (t[j].status != 1)
+		{
+			t[j].k = k;
+			t[j].status = 1;
+			return j;
+		}
+		else i = i + 1;
+	}
+	while (i != m);
+	return -1;
+}
+
+int main()
+{
+	int m;
+	int k;
+	int res;
+	int i = 0;
+	dado t[30];
+
+	cin >> m;
+	
+//inicializa todos os elementos da tabela com status = 0 (vazio) e k = -1 
+	for(i = 0; i < m; i++)
+	{
+		t[i].k = -1;
+		t[i].status = 0;
+	}
+
+	cin >> k;
+	
+	while(k != 0)
+	{
+		hash_insert(t, m, k);
+		cin >> k;
+	}
+	
+  // imprime a tabela hash
+	for(i = 0; i < m; i++)
+		cout << t[i].k << ' ';
+
+
+	return 0;
+
+}
+
