@@ -1,0 +1,49 @@
+#include <iostream>
+
+using namespace std;
+
+// funcao de ordenação por inserção direta (ordena um vetor de inteiros em ordem decrescente)
+void insercaoDireta(int vetor[], int tamanho)
+{
+  int i,j; // contadores
+  int chave;
+  
+  for (j=1;j<tamanho;j++)
+  {  
+    chave = vetor[j];                           // chave inicializada com o valor do elemento atual do vetor
+    i = j-1;
+    while ((i >= 0) && (vetor[i] < chave))      // verifica se "i" é maior ou igual a zero e se o elemento do vetor na posição "i" é menor que a chave. 
+  {
+    vetor[i+1] = vetor[i];                      // o elemento na posição "i+1" recebe o valor do elemento na posição "i" 
+    i = i-1;                                // o índice "i" é decrementado
+  }
+    vetor[i+1] = chave;                     // a posição "i+1" recebe o valor da chave
+  }
+}
+
+int main ()
+{
+  int vet[100];
+  int i;
+  int tam = 0; // contador
+
+
+    cin >> vet[0];
+
+    while (vet[tam] != 0)
+    {
+        tam++;              // o tamanho do vetor é atualizado a cada valor lido
+        cin >> vet[tam];
+    }
+
+  insercaoDireta (vet, tam);        // chamando a funcao para ordenar o vetor em ordem decrescente
+  
+  
+   // imprimindo o vetor ordenado
+   
+  for (int i = 0; i < tam; i++)
+    cout << vet[i] << " ";
+
+
+  return 0;
+}
