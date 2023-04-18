@@ -1,0 +1,56 @@
+#include <iostream>
+
+using namespace std;
+
+// recebe um vetor de inteiros e seu tamanho como parâmetros e os ordena em ordem crescente
+void bubbleSort(int vetor[], int tamanho) {
+    
+  int i, j;
+  int trab;         // armazena temporariamente o valor do elemento que está sendo movido
+  bool troca;           // verifica se houve troca de elementos
+  int limite;               // limita a quantidade de elementos que serão comparados
+  int aux = 0;
+
+  troca = true;                     // inicializando da variável troca como true, ainda há elementos fora de ordem
+  limite = tamanho - 1;                 // o limite é definido como tamanho - 1 e é reduzido a cada iteração para evitar comparações desnecessárias.
+  
+  while (troca)                 // repete o processo de ordenação até que não haja mais trocas a serem feitas
+  {
+    troca = false;
+    for (i = 0; i < limite; i++)
+      if (vetor[i] > vetor[i + 1]) {
+        trab = vetor[i];
+        vetor[i] = vetor[i + 1];
+        vetor[i + 1] = trab;
+        j = i;
+        troca = true;
+        if (troca == true)
+        aux++;                                  // contador de troca
+        cout << "New trab:" << trab << endl;            // imprime o valor do contador de trocas
+      }
+
+    limite = j;
+  }
+  
+  cout << "Contador: " << aux;
+}
+
+int main() {
+  int n;
+  int vet[100];
+
+    cin >> n;
+    
+    // verificaco
+    while(n > 100 && n <0){
+    cin >> n;
+    }
+
+    // inserindo elementos no vetor
+    for (int i = 0; i < n; i++)
+    cin >> vet[i];
+
+    bubbleSort(vet, n);             // chama a funcao de ordenacao 
+
+  return 0;
+}
