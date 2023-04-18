@@ -1,0 +1,38 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+//calculo da raiz quadrada
+double raiz(double x, double xz, double e)
+{
+  double n; 
+  
+  n = abs((xz*xz) - x);
+  if(n <= e)
+    return xz;
+  else      //  Caso contrário, a função calcula um novo valor de xz
+    n = ((xz*xz)+ x)/(2*xz);
+  
+return raiz(x, n, e);
+}
+
+int main()
+{
+  double x, xz; //x, x zero 
+  double e; //limitante superior
+  double res;
+  
+  //entrando com os dados
+  cin >> x >> xz >> e;
+  
+  //chamando a funcao para calculo da raiz
+  res = raiz(x, xz, e);
+  
+  // imprimindo o valor de res com quatro casas decimais de precisão 
+  cout << fixed << setprecision(4) << res << endl;
+  
+return 0;
+
+}
