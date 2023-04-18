@@ -1,0 +1,119 @@
+#include <iostream>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+struct dado
+{
+	int status;
+	int k; // chave
+};
+
+int hash_aux(int k, int m)
+{
+	int h;
+
+	//k mod m
+	h = k % m;
+
+	if (h < 0)
+	{
+		h += m;
+	}
+
+	return h;
+}
+
+int hash1(int k, int i, int m)
+{
+	// h(k,i,m)=(h'(k,m)+i)modm
+
+	int H;
+
+	//sondagem linear
+	H = (hash_aux(k, m) + i) % m;
+
+	return H;
+}
+
+int hash_insert(dado t[], int m, int k) //funcao para insercao
+{
+	int i = 0;
+	int j;
+
+	do
+	{
+		j = hash1(k, i, m);         // chamando funcao hash1 para calcular onde o elemento deve ser inserido
+
+		if (t[j].status != 1)
+		{
+			t[j].k = k;
+			t[j].status = 1;
+			return j;
+		}
+		else i = i + 1;
+	}
+	while (i != m);
+	
+	return -1;
+}
+
+//pesquisa o elento desejado
+int hash_search(dado t[], int m, int k)
+{
+	int i = 0;
+	int j;
+
+	do
+	{
+		j = hash1(k, i, m);
+		if (t[j].k == k)               	// verifica se a chave do elemento armazenado é igual à chave procurada
+			return j;
+		i++;
+	}while (t[j].status != 0 && i < m);     // em loop até encontrar um slot vazio ou percorrer toda a tabela
+	
+	return -1;
+}
+
+int main()
+{
+	int res;
+	int m; //tamanho da tabela
+	int k; //chave a ser inserida na tabela
+	int p; // chave para pesquisa
+	int i = 0;
+	dado t[30];
+
+	cin >> m;
+
+	//iguala todos os status a -1
+	for(i = 0; i < m; i++)
+	{
+		t[i].k = -1;
+		t[i].status = 0;
+	}
+
+	cin >> k;
+
+	// insere na tabela até que a chave lida seja zero
+	while(k != 0)
+	{
+		hash_insert(t, m, k);
+		cin >> k;
+	}
+	
+	// buscando pela chave lida 
+	cin >> p;
+	
+		res = hash_search(t, m, p);
+
+  // exibindo a posição onde a chave foi encontrada 
+	if(res != -1)
+		cout << "Chave " << p << " encontrada na posicao " << res << endl;
+	else cout << "Chave " << p << " nao encontrada" << endl;
+
+
+	return 0;
+
+}
