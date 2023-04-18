@@ -1,0 +1,26 @@
+#include <iostream>
+
+using namespace std;
+int pot(int a, int n)
+{
+	if (n == 0) // qualquer número elevado a zero é igual a um
+	{
+		return 1;
+	}
+	else                                // Caso contrário 
+		return a * pot(a, n-1);     // a função retorna a multiplicado pela função, que reduz a potência em um e chama a função recursivamente até que n seja igual a zero
+}
+
+int main()
+{
+	int n;
+	int a;
+	
+	// lendo valores	
+	cin >> a >> n;
+	
+	// imprimindo resultado ao chamar a funcao
+	cout << pot(a, n);
+	
+	return 0;
+}
