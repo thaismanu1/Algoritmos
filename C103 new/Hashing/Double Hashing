@@ -1,0 +1,69 @@
+#include <iostream>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int h1(int k, int m)
+{
+	int h;
+
+	//k mod m
+	h = k % m;
+
+	if (h < 0)
+	{
+		h += m;
+	}
+
+	return h;
+}
+
+int h2(int k, int m) // calcula o deslocamento a ser aplicado ao índice
+{
+	int h;
+	
+	h = 1 + (k % (m-1));
+
+	if (h < 0)
+	{
+		h += m;
+	}
+
+	return h;
+}
+
+
+// double hashing
+int dhash(int k, int m, int i)
+{
+	// h(k,i)=(h1(k)+ih2(k))modm
+	int res;
+	int H1, H2;
+    
+    // combina as funções de hash h1 e h2 para calcular o índice final para uma determinada chave 
+	H1 = h1(k,m);
+	H2 = h2(k,m);
+	
+	res = (H1 + i*H2)%m;
+
+	return res;
+}
+
+
+int main()
+{
+	int m; //tamanho da tabela
+	int k; //chave a ser inserida na tabela
+	int i = 0;
+	
+	cin >> k >> m ;
+
+	for(i = 0; i < m; i++)
+	{
+		cout << dhash(k, m, i) << " ";
+	}
+
+	return 0;
+
+}
