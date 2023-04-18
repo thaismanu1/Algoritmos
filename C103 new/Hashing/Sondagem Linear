@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+int hash_aux(int k, int m)
+{
+	int h;
+
+	//k mod m	
+	h = k % m;
+
+	if(h < 0) // Se o resultado for negativo, adiciona-se o tamanho da tabela m para garantir que o índice seja sempre um valor positivo
+    h += m;
+	
+	return h;
+}
+
+// sondagem linear
+int hash1(int k, int i, int m)
+{
+	// h(k,i,m)=(h'(k,m)+i)modm
+	
+	int H;
+	
+	//sondagem linear
+	H = (hash_aux(k,m)+i)% m;
+	
+	return H;
+}
+
+int main()
+{
+    int k;
+    int i;
+    int m;
+    
+    cin >> k >> m;
+    
+    // imprimindo os elementos
+    for(int i=0; i<m; i++)
+        cout << hash1(k,i,m) << " ";
+        
+        return 0;
+    
+}
