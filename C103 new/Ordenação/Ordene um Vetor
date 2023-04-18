@@ -1,0 +1,67 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+// funcao para ordenar em ordem crescente
+void quickSort (int vetor[], int tamanho, int i, int j)
+{
+  int trab, esq, dir; // elementos para separar os valores menores do pivô dos maiores
+  int pivo;                 // elemento central
+  
+  esq = i;
+  dir = j;
+  pivo = vetor[(int) round ((esq + dir) / 2.0)];
+
+  do
+    {
+      while (vetor[esq] < pivo)
+	esq++;
+      while (vetor[dir] > pivo)
+	dir--;
+
+      if (esq <= dir)
+
+	{
+	  trab = vetor[esq];
+	  vetor[esq] = vetor[dir];
+	  vetor[dir] = trab;
+	  esq++;
+	  dir--;
+	}
+    }
+  while (esq <= dir);                // executado até que as posições do início e fim do vetor se encontrem, o que significa que o vetor já está ordenado 
+
+    // a função é chamada recursivamente para ordenar os elementos à esquerda e à direita do pivô.
+  if (dir - i >= 0)
+    quickSort (vetor, tamanho, i, dir);
+  if (j - esq >= 0)
+    quickSort (vetor, tamanho, esq, j);
+
+
+}
+
+int main ()
+{
+  int vet[100];
+  int i;
+  int tam = 0; // tamanho do vetor
+
+
+    cin >> vet[0];          // lendo o primeiro elemento do vetor
+
+    while (vet[tam] != -1)           //  lê os demais elementos até que o valor -1 seja encontrado
+    {
+        tam++;
+        cin >> vet[tam];
+    }
+
+  quickSort (vet, tam, 0, tam - 1);     // chamando a funcao para ordenar o vetor em ordem crescente
+  
+  // imprimindo os elementos ordenados
+  for (int i = 0; i < tam; i++)
+    cout << vet[i] << " ";
+
+
+  return 0;
+}
