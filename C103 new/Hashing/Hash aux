@@ -1,0 +1,18 @@
+#include <iostream>
+
+using namespace std;
+
+int hash_aux(int k, int m)
+{
+	//h(k,m)=kmodm
+	int h;
+	
+	h = k % m;
+	
+	if (h<0)
+	{
+		h += m;
+	}
+	
+	return h;
+}
