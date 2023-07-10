@@ -1,0 +1,136 @@
+#include <iostream>
+#include <list>
+
+#define INT_MAX 99999
+
+using namespace std;
+
+struct no
+{
+    int v; // vertice adjacente
+    int peso; // peso da aresta
+};
+
+void cria_aresta(list<no> adj[], int u, int v, int p, int orientado)
+{
+    no aux;
+
+    aux.v = v;
+    aux.peso = p;
+
+    adj[u].push_back(aux); // Adiciona a aresta ao vértice u
+
+    if (orientado == 0) // se nao for orientado
+    {
+        aux.v = u;
+        adj[v].push_back(aux); // Adiciona a aresta ao vértice v também
+    }
+}
+
+void dijkstra(list<no> adj[], int nVertices, int start, int end)
+{
+    bool intree[nVertices];
+    int distance[nVertices];
+    int parent[nVertices];
+    int v, caminho;
+    int dest;
+    int weight;
+    int dist;
+    list<int> percurso;
+
+    list<no>::iterator p;
+
+    for (int u = 0; u < nVertices; u++)
+    {
+        intree[u] = false;
+        distance[u] = INT_MAX;
+        parent[u] = -1;
+    }
+
+    distance[start] = 0;
+    v = start;
+
+    while (intree[v] == false)
+    {
+        intree[v] = true;
+
+        for (p = adj[v].begin(); p != adj[v].end(); p++)
+        {
+            dest = p->v;
+            weight = p->peso;
+
+            if (distance[dest] > distance[v] + weight)
+            {
+                distance[dest] = distance[v] + weight;
+                parent[dest] = v;
+            }
+        }
+
+        v = 0;
+        dist = INT_MAX;
+
+        for (int u = 0; u < nVertices; u++)
+        {
+            if (intree[u] == false && dist > distance[u])
+            {
+                dist = distance[u];
+                v = u;
+            }
+        }
+    }
+
+    // Mostrar o caminho de menor custo
+
+    caminho = end;
+
+    while (caminho != -1)
+    {
+        percurso.push_back(caminho);
+        caminho = parent[caminho];
+
+    }
+
+    cout << "Menor caminho: ";
+    while (!percurso.empty())
+    {
+        cout << percurso.back() << " ";
+        percurso.pop_back();
+    }
+
+    cout << endl;
+    cout << "Custo: " << distance[end] << endl;
+}
+
+int main()
+{
+    int origem; //vertice origem
+    int destino; //vertice destino
+    int u; // vertice inicial
+    int v; // vertice final
+    int p;
+    int nVertices;
+    int orientado;
+
+    list<no> adj[10];
+
+
+    cin >> nVertices >> orientado >> origem >> destino;
+
+    cin >> u >> v >> p;
+
+    while (u != -1 || v != -1 || p != -1)
+    {
+        cria_aresta(adj, u, v, p, orientado);
+        cin >> u >> v >> p;
+    }
+
+    dijkstra(adj, nVertices, origem, destino);
+
+    for (int i = 0; i < nVertices; ++i)
+    {
+        while (!adj[i].empty())
+            adj[i].pop_front();
+    }
+    
+    return 0;
+}
