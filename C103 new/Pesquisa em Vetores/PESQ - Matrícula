@@ -1,0 +1,81 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+struct Aluno {
+    string nome;
+    string curso;
+    int matricula;
+};
+
+//funcao de busca sequencial
+int sequencial(Aluno alunos[], int tamanho, string x)
+{
+    bool achou = false; // var aux p/ busca
+    int i=0; // contador
+    int res;
+
+ 
+    for(i = 0; i<tamanho; i++)
+    {
+        if (alunos[i].nome == x)
+        {
+            achou = true;
+            res = i;
+        }
+    }
+    
+    if(achou == true)
+    {
+        return res;
+    }else return -1;
+}
+
+int main()
+{
+    int res;
+    int n; //numero de alunos
+    string busca; // nome a ser procurado
+    Aluno aluno[100];
+    int i;
+    
+    cin >> n;
+
+    //validação
+    while(n < 1 || n > 100)
+    {
+        cin >> n;
+    }
+
+    cin.ignore();
+
+    for(i=0; i < n; i++)
+    {
+        getline(cin, aluno[i].nome);
+        getline(cin, aluno[i].curso);
+        cin >> aluno[i].matricula;
+        cin.ignore();
+    }
+    
+    //entrando com o nome desejado para busca
+    getline(cin, busca);
+
+    cout << endl;
+
+    res = sequencial(aluno,n,busca);
+    //saída de dados
+    if (res == -1)
+    {
+        cout << "Aluno nao localizado " << endl;
+    }
+    else
+    {
+        i = res;
+        cout << aluno[i].nome << endl;
+        cout << aluno[i].curso << endl;
+        cout << aluno[i].matricula << endl;
+    }
+
+    return 0;
+}
