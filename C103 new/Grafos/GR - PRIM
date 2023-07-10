@@ -1,0 +1,125 @@
+#include <iostream>
+#include <list>
+#define INT_MAX 99999
+
+using namespace std;
+
+struct no
+{
+    int v; // vertice adjacente
+    int peso; // peso da aresta
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+    no aux;
+    
+    aux.v = v;
+    aux.peso = p;
+    
+    adj[u].push_back(aux); // Adiciona a aresta ao vértice u
+    
+    if(orientado == 0) // se nao for orientado
+    {
+        aux.v = u;
+        adj[v].push_back(aux); // Adiciona a aresta ao vértice v também
+    }
+}
+
+// Algoritmo de Prim para encontrar a Árvore Geradora Mínima
+void prim(list<no>adj[], int nVertices, int start)
+{
+	int u; 
+	int v;
+	int destino;
+	int weight; 
+	int dist;
+	int soma = 0;
+	bool intree[30];            // vetor para marcar os vértices já visitados
+	int parent[30];                     // vetor para armazenar os pais dos vértices
+	int distance[30];                       // vetor para armazenar as distâncias mínimas
+	
+	list<no>::iterator p;                       // ponteiro para percorrer a lista de adjacência
+	
+	// inicializando vetores
+	for (u=0; u<nVertices; u++)     // para cada u em V
+	{
+		intree[u] = false;                  // nenhum vértice visitado inicialmente
+        distance[u] = INT_MAX;                      // distância inicial é infinito
+        parent[u] = -1;                         // nenhum pai definido inicialmente
+	}
+	
+	distance[start] = 0;                    // distância para o vértice de partida é 0
+    v = start;
+    
+    // enquanto o vertice não estiver na árvore
+    while(intree[v] == false)
+	{
+        intree[v] = true;                               // marca o vértice como visitado
+        
+        // percorre todas as arestas do vértice v
+        for(p=adj[v].begin(); p!= adj[v].end(); p++)
+        {
+			destino = p->v;
+            weight = p->peso;
+            
+            // verificando se não está na árvore e se peso é menor que destino
+            if(intree[destino]==false && weight < distance[destino])
+			{
+				distance[destino] = weight;                 // Atualiza a distância mínima
+                parent[destino] = v;                // ultimo vertice passa a ser pai
+			} 
+   
+		} 
+		
+		// seleciona o vértice não visitado com a menor distância como próximo vértice v
+        v = 0;
+        dist = INT_MAX;
+        for (u=0; u<nVertices; u++) // para cada u em V
+		{
+			if(intree[u]==false && distance[u]<dist)
+			{
+				dist = distance[u];
+                v = u;
+			}
+		}   
+	}
+	
+	cout << "Arvore Geradora Minima: " << endl;
+	for (u=0; u<nVertices; u++) // para cada u em V
+	{
+		if(u != start)
+		{
+			cout << parent[u] << " " << u << endl;
+			soma += distance[u];
+			
+		}
+	}
+        cout << "Custo: " << soma << endl;
+}
+
+int main()
+{
+	int v0; //vertice origem
+	int u; // vertice 
+	int v;
+	int p;
+	int nVertices;
+	int orientado;
+	
+	list<no> adj[10];
+	
+	
+	cin >> nVertices >> orientado >> v0;
+	
+	cin >> u >> v >> p;
+	while(v != -1 || u != -1 || p != -1)
+	{
+		cria_aresta(adj, u, v, p, orientado);
+		cin >> u >> v >> p;
+	}
+	
+	prim(adj, nVertices, v0);
+	
+	
+}
