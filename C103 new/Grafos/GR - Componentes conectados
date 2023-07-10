@@ -1,0 +1,110 @@
+#include <list>
+#include <iostream>
+
+using namespace std;
+
+struct no
+{
+    int v; // vertice adjacente
+    int peso; // peso da aresta
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+    no aux;
+    
+    aux.v = v;
+    aux.peso = p;
+    
+    adj[u].push_back(aux);
+    
+    if(orientado == 0) // se nao for orientado
+    {
+        aux.v = u;
+        adj[v].push_back(aux);
+    }
+}
+void bfs(list<no>adj[], int nVertices, int s) // busca em largura
+{
+    char state[50]; // undiscovered, discovered, processed
+    int pai[50];
+    int u, v;
+    int cont = 0;
+    bool conexo; // true quando conexo, false quando nao conexo
+
+    list<no>::iterator p;
+    list <int> Q;
+
+    for (u = 0; u<nVertices; u++)
+    {
+        if (u != s) // enquanto vertice for diferente do vertice de origem
+        {
+            state[u] = 'u'; // undiscovered
+            pai[u] = -1; // sem pais
+        }
+    }
+
+    state[s] = 'd'; // discovered
+    pai[s] = -1;
+    Q.push_back(s);
+
+    while (!Q.empty())
+    {
+        u = *Q.begin();
+        Q.pop_front();
+        for (p=adj[u].begin(); p!=adj[u].end(); p++)
+        {
+            v = p->v;
+            if (state[v] == 'u')
+            {
+                state[v] = 'd';
+                pai[v] = u;
+                Q.push_back(v);
+            }
+        }
+        state[u] = 'p'; // processed
+    }
+
+    //descobrindo se é conexo
+    conexo = true;
+    for (int i = 0; i < nVertices; ++i)
+    {
+        //se algum vertice for "undiscovered" (nao descoberto)
+        if (state[i] == 'u')
+            conexo = false;
+    }
+
+    if (conexo)
+        cout << "Conexo" << endl;
+    
+    else 
+        cout << "Nao conexo" << endl;
+
+}
+
+int main()
+{
+    int v; // vertice inicial
+    int vf; // vertice de destino
+    int v0; // vertice de origem
+    int n;
+    int p = 1; // peso
+    int nVertices; // numero de vertices
+    int o = 0;
+    
+    no aux; // No auxiliar
+    list<no> adj[10]; // criando lista
+ 
+    
+    cin >> nVertices >> v;
+    cin >> v0 >> vf;
+    while(v != -1 || vf != -1)
+    {
+        cria_aresta(adj, v, vf, p, o);
+        cin >> v >> vf;
+    }
+    
+        bfs(adj, nVertices, v0);
+    
+    return 0;
+}
