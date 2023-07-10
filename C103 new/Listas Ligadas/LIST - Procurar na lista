@@ -1,0 +1,56 @@
+#include <iostream>
+#include <stdio.h>
+#include <list>
+
+using namespace std;
+
+bool encontrar(list<int> lista, int x)
+{
+    bool achou = false; // Retorna 1 se encontrou ou 0 se não
+    
+    list<int>::iterator p; //"ponteiro" para varrer a lista
+    
+    for(p= lista.begin(); p!= lista.end(); p++){
+		if(*p == x)
+		achou = true;
+	}
+
+    if (achou == true)
+        return 1;
+    else return 0;
+    
+}
+
+int main(){
+    
+    list<int> lista; // "ponteiro" para a lista
+    int x; // var aux p/ leitura de dados
+    int n; // var para busca
+	int res;
+	
+    // lendo e inserindo elementos na lista
+    cin >> x;
+    while(x != 0)
+    {
+        cin >> x;
+        lista.push_back(x);
+     }
+     
+     cin >> n;
+    
+     res = encontrar(lista, n);
+     
+    //mostrando elementos da lista
+    if(res == 1)
+        cout << "Encontrado" << endl;
+    else
+        cout << "Nao encontrado" << endl;
+    
+
+    while(!lista.empty())
+    {
+    lista.pop_front();
+    }
+
+    return 0;
+}
