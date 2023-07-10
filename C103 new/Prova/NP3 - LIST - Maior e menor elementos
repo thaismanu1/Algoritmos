@@ -1,0 +1,40 @@
+#include <iostream>
+#include <list>
+using namespace std;
+// Retorna menor e o maior elemento da lista
+void maiorMenor(list<int> lista, int &menor, int &maior)
+{
+    list<int>::iterator p;
+    
+    menor = *lista.begin();
+    maior = *lista.begin();
+    
+    for(p = lista.begin(); p != lista.end(); p++)
+    {
+        if(*p < menor)
+            menor = *p;
+        if(*p > maior)
+            maior = *p;
+    }
+}
+int main()
+{
+    list<int>lista; // ponteiro para a lista ligada
+    int x; // var auxiliar para leitura
+    int menor, maior; // menor e maior elementos da lista
+    // Lendo elementos e inserindo na lista
+    cin >> x;
+    while(x != 0)
+    {
+        lista.push_back(x);
+        cin >> x;
+    }
+    // Encontrando e mostrando o menor e maior elementos da lista
+    maiorMenor(lista, menor, maior);
+    cout << "menor: " << menor << endl;
+    cout << "maior: " << maior << endl;
+    // Liberando a memoria usada pela lista
+    while(!lista.empty())
+        lista.pop_front();
+    return 0;
+}
