@@ -1,0 +1,58 @@
+#include <list>
+#include <iostream>
+
+using namespace std;
+
+struct no
+{
+    int v; // vertice adjacente
+    int peso; // peso da aresta
+};
+
+void cria_aresta(list<no>adj[], int u, int v, int p, int orientado)
+{
+	no aux;
+	
+	aux.v = v;
+	aux.peso = p;
+	
+	adj[u].push_back(aux);
+	
+	if(orientado == 0) // se nao for orientado
+	{
+		aux.v = u;
+		adj[v].push_back(aux);
+	}
+}
+
+int main()
+{
+	int v; // vertice inicial
+	int vf; // vertice final
+	int p; // peso
+	int nVertices; // numero de vertices
+	int o; // orientado
+	
+	list<no> adj[10]; // criando lista
+	list<no>::iterator pont; // armazena o endereço de uma lista de no
+	
+	cin >> nVertices >> o;
+	cin >> v >> vf >> p;
+	
+	while(v != -1 || vf != -1 || p != -1)
+	{
+		cria_aresta(adj, v, vf, p, o);
+		cin >> v >> vf >> p;
+	}
+	
+	
+	for(int v = 0; v < nVertices; v++)
+	{
+		for(pont = adj[v].begin(); pont != adj[v].end(); pont++)
+		{
+			cout << v << " " << pont->v << " " << pont->peso << endl;
+		}
+	}
+	
+	return 0;
+}
