@@ -1,0 +1,44 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+struct aluno
+{
+	float n1, n2, n3, n4;
+	float media;
+};
+
+void media(float n1, float n2, float n3, float n4, float *m1)
+{
+	*m1 = (n1 + n2 + n3 + n4)/4;
+}
+
+int main()
+{
+	int q; // quantidade de alunos
+	float m=0; // media das medias
+	
+	aluno *n;
+	
+	cin >> q;
+	
+	n = new aluno[q];
+	
+		for(int i = 0; i<q; i++)
+			cin >> n[i].n1 >> n[i].n2 >> n[i].n3 >> n[i].n4;
+	
+	
+	cout << fixed << setprecision(2);
+	
+		for(int i = 0; i<q; i++){
+			media(n[i].n1, n[i].n2, n[i].n3, n[i].n4, &n[i].media);
+			m += n[i].media;
+		}
+		
+	cout << m/q << endl;
+	
+	delete n;
+	
+	return 0;
+}
