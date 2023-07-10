@@ -1,0 +1,50 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// Retorna a posicao em que x foi encontrado no vetor
+// Retorna -1 se nao encontrar
+int sequencial(float vetor[], int tamanho, float x)
+{
+    bool achou = false; // var aux p/ busca
+    int i = 0; // contador
+    while (achou == false && i < tamanho)
+        achou = vetor[i++] == x;
+    if (achou)
+        return (i - 1);
+    else
+        return -1;
+}
+int main()
+{
+    float vet[20]; // armazena os elementos
+    float x; // elemento a ser procurado
+    float aux; // var aux para leitura dos dados
+    int i; // contador
+    int n; // quantidade de elementos inseridos no vetor
+    int pos; // posicao onde x foi encontrado no vetor
+    
+    // Lendo dados e inserindo-os no vetor
+    cin >> aux;
+    i = 0;
+    while(aux != -1)
+    {
+        vet[i] = aux;
+        i++;
+        cin >> aux;
+    }
+    n = i;
+    
+    // Lendo elemento a ser procurado
+    cin >> x;
+    
+    // Procurando por x e mostrando o resultado
+    pos = sequencial(vet, n, x);
+    cout << fixed << setprecision(1);
+    if(pos == -1)
+        cout << x << " nao encontrado" << endl;
+    else
+        cout << x << " encontrado na posicao " << pos << endl;
+    return 0;
+}
