@@ -1,0 +1,27 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+int main()
+{
+	list<int> lista; // "ponteiro" para a lista
+	int x; // var aux p/ leitura de dados
+	int i; // contador
+	
+	// lendo e inserindo elementos na lista
+	for(i=0; i<4; i++)
+	{
+		cin >> x;
+		lista.push_back(x);
+	}
+	
+	//mostrando elementos da lista
+	while(!lista.empty())
+	{
+		cout << *lista.begin() << endl;
+		lista.pop_front();
+	}
+	
+	return 0;
+}
