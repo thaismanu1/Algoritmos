@@ -1,0 +1,60 @@
+#include <iostream>
+
+using namespace std;
+
+//funcao de busca sequencial
+int sequencial(int vetor[],int tamanho, int x)
+{
+    bool achou = false; // var aux p/ busca
+    int i=0; // contador
+
+    while (achou==false && i<tamanho)
+     achou = vetor[i++]==x;
+     if (achou)
+         return i-1;
+     else return -1;
+
+}
+
+int main()
+{
+    int res;
+    int n; //numero de alunos
+    int mat; //numero de matricula
+    int busca; // matricula a ser procurada 
+    int v[10000];
+    int i;
+
+    cin >> n;
+
+    //validação
+    while( n < 1 && n >10000)
+    {
+        cin >> n;
+    }
+
+ //inserindo em um vetor
+    for(i=0; i < n; i++)
+    {
+        cin >> v[i];
+    }
+
+
+    //entrando com a matricula desejada para busca
+    cin >> busca;
+
+    cout << endl;
+
+    //chamando uma
+    res = sequencial(v,n,busca);
+
+
+    //saída de dados
+    if(res == -1)
+    {
+        cout << "Nao localizado " << endl;
+    }else cout << "Corredor " << res << endl;
+
+
+    return 0;
+}
