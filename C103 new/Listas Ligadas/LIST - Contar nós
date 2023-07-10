@@ -1,0 +1,44 @@
+#include <iostream>
+#include <stdio.h>
+#include <list>
+
+using namespace std;
+
+int soma(list<int> lista)
+{
+	int s = 0;
+	
+    list<int>::iterator p; 
+    
+    for(p= lista.begin(); p!= lista.end(); p++){
+    	s += 1;
+	}
+
+	return s;
+    
+}
+
+int main(){
+    
+    list<int> lista; // "ponteiro" para a lista
+    int x; // var aux p/ leitura de dados
+	
+    // lendo e inserindo elementos na lista
+    cin >> x;
+    while(x != 0)
+    {
+        lista.push_back(x);
+        cin >> x;
+     }
+     
+    //mostrando a soma
+        cout <<  soma(lista) << endl;
+    
+
+    while(!lista.empty())
+    {
+    lista.pop_front();
+    }
+
+    return 0;
+}
