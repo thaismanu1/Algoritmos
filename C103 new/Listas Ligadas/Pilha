@@ -1,0 +1,27 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+int main()
+{
+	int x;
+    list<int> lista;
+
+    // inserindo elementos na lista
+	for(int i = 0; i < 4; i++)
+	{
+		cin >> x;
+		lista.push_front(x);
+	}
+
+	
+	while(!lista.empty())
+	{
+		x = *lista.begin();
+		cout << x << " ";
+		lista.pop_front(); // removendo
+	}
+
+	return 0;
+}
