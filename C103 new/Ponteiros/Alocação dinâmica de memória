@@ -1,0 +1,32 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+struct aluno
+{
+	float n1, n2, n3, n4;
+	float media;
+};
+
+void media(float n1, float n2, float n3, float n4, float *m1)
+{
+	*m1 = (n1 + n2 + n3 + n4)/4;
+}
+
+int main()
+{
+	aluno *n;
+	
+	n = new aluno;
+	
+	cin >> n->n1 >> n->n2 >> n->n3 >> n->n4;
+	cout << fixed << setprecision(2);
+	media(n->n1, n->n2, n->n3, n->n4, &n->media);
+	
+	cout << n->media << endl;
+	
+	delete n;
+	
+	return 0;
+}
