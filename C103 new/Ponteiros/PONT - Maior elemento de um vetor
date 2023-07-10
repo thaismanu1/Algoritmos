@@ -1,0 +1,42 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+    int n; // tamanho do vetor
+    int *p; // ponteiro para percorrer o vetor
+    int *v = NULL; // vetor
+    
+    cin >> n; // entrando com o tamanho desejado para o vetor
+    
+    v = new int[n]; // alocando memoria
+    
+    p = v;
+    
+    // inserindo elementos no vetor
+    for (int i = 0; i < n; i++)
+    {
+        cin >> *p;
+        p++;
+    }
+    
+    p = v; // resetando o ponteiro para o início do vetor
+    
+    int maior = *p; // assumindo o primeiro elemento como o maior
+    
+    // encontrando o maior elemento do vetor
+    for (int i = 0; i < n; i++)
+    {
+        if (*p > maior)
+            maior = *p;
+        p++;
+    }
+    
+    cout << maior;
+    
+    delete[] v;
+    
+    return 0;
+}
